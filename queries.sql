@@ -40,9 +40,9 @@ RETURN(enough_stock);
 
 END//
 DELIMITER ;
-
-SELECT FoodType_ID, FoodType, Amount_eats, Amount_available, enough_stock
-from vw_FoodStock;
+									      
+SELECT FoodType_ID, FoodType, Amount_eats, Amount_available, enough_FoodStock(Amount_available, Amount_eats)
+FROM vw_FoodStock;
 
 
 -- stored procedure
