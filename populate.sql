@@ -2,9 +2,15 @@ use zoo;
 
 insert into
 enclosure
-(enclosure_id, enclosure_name, habitat, animal, location, hours)
+(enclosure_id, enclosure_name, allocated_zookeeper, animal_id, opening_hours)
 values
-(1, 'penguin parade', 'pool', 'penguin', 'hillside view', '0800-1800');
+(001, 'land of the lion', 002, 1 , '0800-1800'),
+(002, 'zone of the zebra', 003, 2 , '0800-1800'),
+(003, 'grounds of the giraffe', 004, 3 , '0800-1800'),
+(004, 'home of the hippos', 005, 4 , '0800-1800'),
+(005, 'parade of the penguins', 006, 5 , '0800-1800'),
+(006, 'locale of the lemur', 007, 6 , '0800-1800')
+;
 
 INSERT INTO zookeeper
 (employee_id, full_name, job_title, hire_date, date_of_birth, gender, allocated_enclosure, contact_number)
