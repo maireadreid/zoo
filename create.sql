@@ -4,31 +4,14 @@ create database zoo; -- create the overall zoo database
 
 use zoo; -- use this database to create tables
 
---enclosure table
-create table enclosure(
-
-enclosure_id int not null,
-enclosure_name varchar(20),
-allocated_zookeeper int,
-species varchar(20),
-opening_hours varchar(10),
-
-constraint 
-enclosure_pk 
-primary key
-(enclosure_id),
-
-foreign key
-(species)
-REFERENCES
-animals
-(species_name),
-
-foreign key
-(allocated_zookeeper)
-REFERENCES
-zookeeper
-(employee_id)
+-- animal table
+CREATE TABLE ANIMALS
+(
+    animal_id INT NOT NULL PRIMARY KEY,
+    animal_name VARCHAR(50) NOT NULL,
+    species_name VARCHAR(50) NOT NULL,
+    animal_DOB DATE,
+    arrival_date DATE NOT NULL
 );
 
 -- zookeeper table
@@ -42,21 +25,37 @@ CREATE TABLE zookeeper
     gender VARCHAR(10),
     allocated_enclosure VARCHAR(55),
     contact_number VARCHAR(55),
-    CONSTRAINT employee_id_pk PRIMARY KEY(employee_id),
-	  CONSTRAINT employee_id_fk FOREIGN KEY(full_name) REFERENCES xxx
+    CONSTRAINT employee_id_pk PRIMARY KEY(employee_id)
+	 -- CONSTRAINT employee_id_fk FOREIGN KEY(full_name) REFERENCES xxx
     );
 
--- animal table
-CREATE TABLE ANIMALS
-(
-    animal_id INT NOT NULL PRIMARY KEY,
-    animal_name VARCHAR(50) NOT NULL,
-    species_name VARCHAR(50) NOT NULL,
-    animal_DOB DATE,
-    arrival_date DATE NOT NULL
+-- enclosure table
+create table enclosure(
+
+enclosure_id int not null,
+enclosure_name varchar(20),
+allocated_zookeeper int,
+animal_id int,
+opening_hours varchar(10),
+
+constraint 
+enclosure_pk 
+primary key
+(enclosure_id),
+
+CONSTRAINT animal_fk FOREIGN KEY (animal_id)
+REFERENCES animals(animal_id),
+
+foreign key
+zookeeper_fk	
+(allocated_zookeeper)
+REFERENCES
+zookeeper
+(employee_id)
 );
 
-- feeding table
+
+-- feeding table
 CREATE TABLE feeding (
 	FoodType_ID INT,
 	FoodType VARCHAR(50),
