@@ -57,18 +57,20 @@ CREATE TABLE ANIMALS
     arrival_date DATE NOT NULL
 );
 
--- feeding table
+- feeding table
 CREATE TABLE feeding (
 	FoodType_ID INT,
 	FoodType VARCHAR(50),
-    Animal VARCHAR(100),
+    Animal_id INT,
 	Amount_eats FLOAT(2),
-	CONSTRAINT feeding_PK PRIMARY KEY (FoodType_ID)
-    );
+	CONSTRAINT feeding_PK PRIMARY KEY (FoodType_ID));
+
+ALTER TABLE feeding
+ADD CONSTRAINT fk_Animal_id FOREIGN KEY (Animal_id) REFERENCES ANIMALS (animal_id);
 
 -- stock table
 CREATE TABLE stock (
 	FoodType_ID INT,
     Amount_available Float(2),
-    CONSTRAINT FoodType_ID_fk FOREIGN KEY (FoodType_ID) REFERENCES feeding
+    CONSTRAINT fk_FoodType_ID FOREIGN KEY (FoodType_ID) REFERENCES feeding (FoodType_ID)
     );
