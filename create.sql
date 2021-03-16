@@ -46,14 +46,8 @@ primary key
 CONSTRAINT animal_fk FOREIGN KEY (animal_id)
 REFERENCES animals(animal_id),
 
-foreign key
-zookeeper_fk	
-(allocated_zookeeper)
-REFERENCES
-zookeeper
-(employee_id)
-);
-
+CONSTRAINT zookeeper_fk FOREIGN KEY (allocated_zookeeper)
+REFERENCES zookeeper(employee_id));
 
 -- feeding table
 CREATE TABLE feeding (
