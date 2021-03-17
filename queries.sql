@@ -25,6 +25,18 @@ WHERE animal_id =
 		FROM food_stock fs
 		WHERE fs.Amount_available = 0))
 		;
+-- C) returns names of animals for which there is not enough food stock
+SELECT a.animal_id, a.species_name
+FROM animals a
+WHERE animal_id IN 
+    (SELECT f.Animal_id
+	FROM feeding f
+	WHERE f.FoodType_ID IN 	
+		(SELECT vwf.FoodType_ID
+		FROM vw_FoodStock vwf
+		WHERE enough_FoodStock(Amount_available, Amount_eats) = 'NO'
+		OR enough_FoodStock(Amount_available, Amount_eats) = 'JUST ENOUGH'))
+		;
 
 -- function
 USE ZOO;
