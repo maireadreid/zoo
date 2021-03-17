@@ -4,6 +4,28 @@
 
 -- subquery 
 
+-- A) Find the name of the animal that eats alfalfa
+
+SELECT a.animal_id, a.species_name
+FROM animals a
+WHERE animal_id =  
+	(SELECT f.FoodType_ID
+	FROM feeding f
+	WHERE FoodType = 'alfalfa')
+;
+
+-- B) Find the name of the animals species where food stock is 0 
+Select a.animal_id, a.species_name
+FROM animals a
+WHERE animal_id = 
+	(SELECT f.Animal_id
+	FROM feeding f
+	WHERE f.FoodType_ID = 
+		(SELECT fs.FoodType_ID
+		FROM food_stock fs
+		WHERE fs.Amount_available = 0))
+		;
+
 -- function
 USE ZOO;
 
