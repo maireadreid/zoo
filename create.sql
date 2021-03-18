@@ -26,7 +26,7 @@ CREATE TABLE zookeeper
     allocated_enclosure VARCHAR(55),
     contact_number VARCHAR(55),
     CONSTRAINT employee_id_pk PRIMARY KEY(employee_id)
-	 -- CONSTRAINT employee_id_fk FOREIGN KEY(full_name) REFERENCES xxx
+	 -- CONSTRAINT employee_id_fk FOREIGN KEY(full_name) REFERENCES people(full_name)
     );
 
 -- enclosure table
@@ -65,4 +65,45 @@ CREATE TABLE stock (
 	FoodType_ID INT,
     Amount_available Float(2),
     CONSTRAINT fk_FoodType_ID FOREIGN KEY (FoodType_ID) REFERENCES feeding (FoodType_ID)
+    );
+					   
+					   -- people table
+CREATE TABLE people
+(
+	person_id INT NOT NULL,
+    full_name VARCHAR(55) NOT NULL,
+    address VARCHAR (100),
+    email_address VARCHAR(55),
+    contact_number VARCHAR(55),
+    date_of_birth DATE NOT NULL,
+    gender VARCHAR(10),
+    CONSTRAINT person_id_pk PRIMARY KEY(person_id),
+	CONSTRAINT person_id_fk FOREIGN KEY(full_name) REFERENCES zookeeper(full_name)
+    );
+
+					   -- visitor ticket table
+CREATE TABLE visitor_ticket
+(
+	ticket_number_id INT NOT NULL,
+	ticket_number INT NOT NULL,
+    ticket_type VARCHAR(25),
+    date_valid DATE,
+    full_name VARCHAR(55) NOT NULL,
+    CONSTRAINT visitor_ticket_pk PRIMARY KEY(ticket_number_id),
+	CONSTRAINT visitor_ticket_fk FOREIGN KEY(ticket_number) REFERENCES visitors(ticket_number)
+    );
+
+					   -- visitors table
+CREATE TABLE visitors
+(
+	visitor_id INT NOT NULL,
+	ticket_number INT NOT NULL,
+    full_name VARCHAR(55) NOT NULL,
+    returner BOOLEAN NOT NULL,
+    address VARCHAR(100),
+    contact_number VARCHAR(55),
+    email_address VARCHAR(55),
+    date_of_birth DATE,
+    CONSTRAINT visitors_pk PRIMARY KEY(visitor_id),
+    CONSTRAINT visitors_fk FOREIGN KEY(full_name) REFERENCES people(full_name)
     );
