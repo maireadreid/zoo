@@ -97,3 +97,18 @@ END//
 DELIMITER ;
 
 CALL YoungAnimals();
+									      
+-- TRIGGER WHEN ZOOKEEPER RETIRED
+
+CREATE TRIGGER zookeeper_retired  -- trigger name
+ BEFORE DELETE -- {INSERT | UPDATE | DELETE}
+ ON zookeeper FOR EACH ROW -- OLD table 
+ INSERT INTO retired_zookeeper
+ SET 
+ employee_id = OLD.employee_id,
+ full_name =  old.full_name,
+ retired_on =  current_timestamp() -- in-built function
+ ;
+ 
+DELETE FROM zookeeper   
+WHERE employee_id = '004';
