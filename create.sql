@@ -107,7 +107,8 @@ CREATE TABLE visitor_ticket
 	-- CONSTRAINT visitor_ticket_fk FOREIGN KEY(ticket_number) REFERENCES visitors(ticket_number)
 );
 
-					   -- visitors table
+-- Visitors table 
+
 CREATE TABLE visitors
 (
 	visitor_id INT NOT NULL,
