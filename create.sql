@@ -1,21 +1,28 @@
 -- Create the database and tables
 
-create database zoo; -- create the overall zoo database
+-- Create zoo database
 
-use zoo; -- use this database to create tables
+CREATE DATABASE zoo; 
 
--- animal table
-CREATE TABLE ANIMALS
+-- Use this database to create tables
+
+USE zoo; 
+
+-- Animal table
+
+CREATE TABLE animals
 (
-    animal_id INT NOT NULL PRIMARY KEY,
-    animal_name VARCHAR(50) NOT NULL,
-    species_name VARCHAR(50) NOT NULL,
+    animal_id INT NOT NULL,
+    animal_name VARCHAR(55) NOT NULL,
+    species_name VARCHAR(55) NOT NULL,
     animal_DOB DATE,
-    arrival_date DATE NOT NULL
+    arrival_date DATE NOT NULL,
+    CONSTRAINT animal_id_pk PRIMARY KEY(animal_id)
 );
 
--- zookeeper table
-CREATE TABLE zookeeper
+-- Zookeeper table
+
+CREATE TABLE zookeeper 
 (
 	employee_id INT NOT NULL,
     full_name VARCHAR(55) NOT NULL,
@@ -26,48 +33,54 @@ CREATE TABLE zookeeper
     allocated_enclosure VARCHAR(55),
     contact_number VARCHAR(55),
     CONSTRAINT employee_id_pk PRIMARY KEY(employee_id)
-	 -- CONSTRAINT employee_id_fk FOREIGN KEY(full_name) REFERENCES people(full_name)
+	-- CONSTRAINT employee_id_fk FOREIGN KEY(full_name) REFERENCES people(full_name)
     );
 
--- enclosure table
-create table enclosure(
+--  Enclosure table
 
-enclosure_id int not null,
-enclosure_name varchar(20),
-allocated_zookeeper int,
-animal_id int,
-opening_hours varchar(10),
+CREATE TABLE enclosure 
+(
+	enclosure_id INT NOT NULL,
+	enclosure_name VARCHAR(55),
+	allocated_zookeeper INT,
+	animal_id INT,
+	opening_hours VARCHAR(10),
 
-constraint 
-enclosure_pk 
-primary key
-(enclosure_id),
+	CONSTRAINT
+	enclosure_pk 
+	PRIMARY KEY
+	(enclosure_id),
 
-CONSTRAINT animal_fk FOREIGN KEY (animal_id)
-REFERENCES animals(animal_id),
+	CONSTRAINT animal_fk FOREIGN KEY (animal_id)
+	REFERENCES animals(animal_id),
 
-CONSTRAINT zookeeper_fk FOREIGN KEY (allocated_zookeeper)
-REFERENCES zookeeper(employee_id));
+	CONSTRAINT zookeeper_fk FOREIGN KEY (allocated_zookeeper)
+	REFERENCES zookeeper(employee_id)
+);
 
--- feeding table
-CREATE TABLE feeding (
-	FoodType_ID INT,
-	FoodType VARCHAR(50),
-    Animal_id INT,
-	Amount_eats FLOAT(2),
-	CONSTRAINT feeding_PK PRIMARY KEY (FoodType_ID));
+-- Feeding table
 
-ALTER TABLE feeding
-ADD CONSTRAINT fk_Animal_id FOREIGN KEY (Animal_id) REFERENCES ANIMALS (animal_id);
+CREATE TABLE feeding 
+(
+	foodtype_ID INT,
+	foodtype VARCHAR(50),
+    animal_id INT,
+	amount_eats FLOAT(2),
+	CONSTRAINT feeding_pk PRIMARY KEY (foodtype_ID),
+    CONSTRAINT fk_animal_id FOREIGN KEY (animal_id) REFERENCES animals (animal_id)
+);
 
--- stock table
-CREATE TABLE stock (
-	FoodType_ID INT,
-    Amount_available Float(2),
-    CONSTRAINT fk_FoodType_ID FOREIGN KEY (FoodType_ID) REFERENCES feeding (FoodType_ID)
-    );
+-- Stock table
+
+CREATE TABLE stock 
+(
+	foodtype_ID INT,
+    amount_available Float(2),
+    CONSTRAINT fk_foodtype_ID FOREIGN KEY (foodtype_ID) REFERENCES feeding (foodtype_ID)
+);
 					   
-					   -- people table
+-- People table
+
 CREATE TABLE people
 (
 	person_id INT NOT NULL,
@@ -77,11 +90,12 @@ CREATE TABLE people
     contact_number VARCHAR(55),
     date_of_birth DATE NOT NULL,
     gender VARCHAR(10),
-    CONSTRAINT person_id_pk PRIMARY KEY(person_id),
-	CONSTRAINT person_id_fk FOREIGN KEY(full_name) REFERENCES zookeeper(full_name)
+    CONSTRAINT person_id_pk PRIMARY KEY(person_id)
+	-- CONSTRAINT person_id_fk FOREIGN KEY(full_name) REFERENCES zookeeper(full_name)
     );
 
-					   -- visitor ticket table
+-- Visitor ticket table
+
 CREATE TABLE visitor_ticket
 (
 	ticket_number_id INT NOT NULL,
@@ -89,9 +103,9 @@ CREATE TABLE visitor_ticket
     ticket_type VARCHAR(25),
     date_valid DATE,
     full_name VARCHAR(55) NOT NULL,
-    CONSTRAINT visitor_ticket_pk PRIMARY KEY(ticket_number_id),
-	CONSTRAINT visitor_ticket_fk FOREIGN KEY(ticket_number) REFERENCES visitors(ticket_number)
-    );
+    CONSTRAINT visitor_ticket_pk PRIMARY KEY(ticket_number_id)
+	-- CONSTRAINT visitor_ticket_fk FOREIGN KEY(ticket_number) REFERENCES visitors(ticket_number)
+);
 
 					   -- visitors table
 CREATE TABLE visitors
@@ -104,6 +118,6 @@ CREATE TABLE visitors
     contact_number VARCHAR(55),
     email_address VARCHAR(55),
     date_of_birth DATE,
-    CONSTRAINT visitors_pk PRIMARY KEY(visitor_id),
-    CONSTRAINT visitors_fk FOREIGN KEY(full_name) REFERENCES people(full_name)
-    );
+    CONSTRAINT visitors_pk PRIMARY KEY(visitor_id)
+   -- CONSTRAINT visitors_fk FOREIGN KEY(full_name) REFERENCES people(full_name)
+);
