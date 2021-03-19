@@ -15,16 +15,16 @@ values
 INSERT INTO zookeeper
 (employee_id, full_name, job_title, hire_date, date_of_birth, gender, allocated_enclosure, contact_number)
 VALUES
-(001, 'Michael Scott', 'Manager', 2007-04-05, 1980-08-10, 'Male', null, '07287476472'),
-(002, 'Dwight Schrute', 'Assistant Manager', 2010-03-29, 1984-10-05, 'Male', null, '07485484372'),
-(003, 'Pam Beesly', 'Zookeeper', 2009-06-29, 1992-04-16, 'Female', 'monkey kingdom', '07289287937'),
-(004, 'Jim Halpert', 'Lead Zookeeper', 2013-09-03, 1990-07-19, 'Male', 'monkey kingdom', '07108918872'),
-(005, 'Creed Bratton', 'Zookeeper', 2000-01-01, 1960-12-12, 'Male', 'rhino reserve', null),
-(006, 'Toby Flenderson', 'Zookeeper', 2011-02-19, 1976-02-27, 'Male', 'penguin parade', '07465399100'),
-(007, 'Kelly Kapoor', 'Zookeeper', 2015-03-10, 1995-05-21, 'Female', 'penguin parade', '07773645232');
+(001, 'Michael Scott', 'Manager', '2007-04-05', '1980-08-10', 'Male', null, '07287476472'),
+(002, 'Dwight Schrute', 'Assistant Manager', '2010-03-29', '1984-10-05', 'Male', null, '07485484372'),
+(003, 'Pam Beesly', 'Zookeeper', '2009-06-29', '1992-04-16', 'Female', 'monkey kingdom', '07289287937'),
+(004, 'Jim Halpert', 'Lead Zookeeper', '2013-09-03', '1990-07-19', 'Male', 'monkey kingdom', '07108918872'),
+(005, 'Creed Bratton', 'Zookeeper', '2000-01-01', '1960-12-12', 'Male', 'rhino reserve', null),
+(006, 'Toby Flenderson', 'Zookeeper', '2011-02-19', '1976-02-27', 'Male', 'penguin parade', '07465399100'),
+(007, 'Kelly Kapoor', 'Zookeeper', '2015-03-10', '1995-05-21', 'Female', 'penguin parade', '07773645232');
 
 INSERT INTO 
-ANIMALS
+animals
 (animal_id, animal_name, species_name, animal_DOB, arrival_date)
 VALUES
 (1, 'Alex', 'lion', '2001-02-28', '2000-02-28'),
@@ -35,7 +35,7 @@ VALUES
 (6, 'Julien', 'lemur', '2016-12-16', '2016-12-16');
 
 INSERT INTO feeding
-(FoodType_ID, FoodType, Animal_id, Amount_eats)
+(foodtype_ID, foodtype, animal_id, amount_eats)
 VALUES
 (1, 'beef', 1, 10),
 (2, 'grass', 2, 15),
@@ -45,7 +45,7 @@ VALUES
 (6, 'fruit', 6, 12);
 
 INSERT INTO stock
-(FoodType_ID, Amount_available)
+(foodtype_ID, amount_available)
 VALUES
 (1, 2),
 (2, 28),
