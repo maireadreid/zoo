@@ -25,15 +25,15 @@ CREATE TABLE animals
 CREATE TABLE zookeeper 
 (
 	employee_id INT NOT NULL,
-    full_name VARCHAR(55) NOT NULL,
-    job_title VARCHAR(55),
-    hire_date DATE NOT NULL,
-    date_of_birth DATE NOT NULL,
-    gender VARCHAR(10),
-    allocated_enclosure VARCHAR(55),
-    contact_number VARCHAR(55),
-    CONSTRAINT employee_id_pk PRIMARY KEY(employee_id)
-	-- CONSTRAINT employee_id_fk FOREIGN KEY(full_name) REFERENCES people(full_name)
+	full_name VARCHAR(55) NOT NULL,
+	job_title VARCHAR(55),
+	hire_date DATE NOT NULL,
+	date_of_birth DATE NOT NULL,
+	gender VARCHAR(10),
+	allocated_enclosure VARCHAR(55),
+	contact_number VARCHAR(55),
+	CONSTRAINT employee_id_pk PRIMARY KEY(employee_id)
+		-- CONSTRAINT employee_id_fk FOREIGN KEY(full_name) REFERENCES people(full_name)
     );
 
 --  Enclosure table
