@@ -146,3 +146,14 @@ HAVING COUNT(employee_id) > 1;
 SELECT employee_id, full_name, job_title, year(hire_date) as hire_year
 FROM zookeeper
 WHERE hire_date < '2011/03/19';
+
+-- View with joins 
+
+CREATE VIEW joinv 
+AS 
+SELECT f.foodtype_id, f.foodtype, f.animal_id, f.amount_eats, s.amount_available
+FROM feeding f
+INNER JOIN stock s 
+ON f.foodtype_ID = s.foodtype_ID;
+
+SELECT * FROM joinv;
