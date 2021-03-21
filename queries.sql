@@ -127,7 +127,7 @@ DELIMITER //
 CREATE PROCEDURE YoungAnimals() 
 BEGIN
 
-	SELECT animal_name, species_name, animal_DOB
+    SELECT animal_name, species_name, animal_DOB
     FROM 
     ANIMALS
     WHERE 
@@ -143,7 +143,7 @@ CALL YoungAnimals();
 -- Trigger									      									      
 -- When a Zookeeper retires, their information is placed in a retired zookeeper table
 
-CREATE TRIGGER zookeeper_retired  -- trigger name
+ CREATE TRIGGER zookeeper_retired  -- trigger name
  BEFORE DELETE -- {INSERT | UPDATE | DELETE}
  ON zookeeper FOR EACH ROW -- OLD table 
  INSERT INTO retired_zookeeper
