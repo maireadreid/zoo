@@ -53,16 +53,25 @@ WHERE animal_id IN
 		OR enough_FoodStock(Amount_available, Amount_eats) = 'JUST ENOUGH'))
 		;
 
--- Views
--- Create a view table that combines food type and amount
+-- Join
 
-CREATE VIEW vw_FoodStock 
-AS SELECT f.FoodType_ID, f.FoodType, f.Amount_eats,
+SELECT f.FoodType_ID, f.FoodType, f.Amount_eats,
 s.Amount_available
-FROM feeding f, stock s
-WHERE f.FoodType_ID = s.FoodType_ID;
-
-SELECT * from vw_FoodStock;
+FROM feeding f
+INNER JOIN stock s
+ON
+f.FoodType_ID = s.FoodType_ID;
+		 
+-- Views
+		 
+-- CREATE TABLE THAT ADDS FOOD TYPE AND AND AMOUNT
+SELECT f.FoodType_ID, f.FoodType, f.Amount_eats,
+s.Amount_available
+FROM feeding f
+INNER JOIN stock s
+ON
+f.FoodType_ID = s.FoodType_ID;
+SELECT * from food_stock;
 
 -- Creates a view table that combines animal infomration and which enclosure they reside in and what type of food they eat
 
