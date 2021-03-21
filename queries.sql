@@ -155,4 +155,24 @@ CALL YoungAnimals();
 DELETE FROM zookeeper   
 WHERE employee_id = '004';
 
+-- Event
+-- When stock amount available is below or equal to 10, this information is added to the new food order needed table, from which staff can know which food items need to be ordered									      
+
+SET GLOBAL event_scheduler = ON;									      
+									      
+DELIMITER $$
+CREATE EVENT recurring_stock_need_check
+ON SCHEDULE EVERY 1 DAY 
+STARTS '2021-03-01 00:00:00'
+
+DO
+
+BEGIN	
+	INSERT INTO new_food_order_needed
+    SELECT foodtype_id, amount_available
+    FROM stock
+	WHERE amount_available <= 10;
+END$$
+
+DELIMITER ;									      
 									      
