@@ -63,16 +63,6 @@ ON
 f.FoodType_ID = s.FoodType_ID;
 		 
 -- Views
-		 
--- CREATE TABLE THAT ADDS FOOD TYPE AND AND AMOUNT
-SELECT f.FoodType_ID, f.FoodType, f.Amount_eats,
-s.Amount_available
-FROM feeding f
-INNER JOIN stock s
-ON
-f.FoodType_ID = s.FoodType_ID;
-SELECT * from food_stock;
-
 -- Creates a view table that combines animal infomration and which enclosure they reside in and what type of food they eat
 
 CREATE VIEW v
