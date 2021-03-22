@@ -1,58 +1,3 @@
--- Views, stored functions and stored procedures need to be run before the queries
--- As some queries require them
-
--- Example query 
-
-SELECT employee_id, full_name, job_title, year(hire_date) as hire_year
-FROM zookeeper
-WHERE hire_date < '2011/03/19';
-
--- Example query using group by and having
--- Find out which job roles have more than 1 employee
-
-SELECT job_title, COUNT(employee_id) as number_of_staff
-FROM zookeeper
-GROUP BY job_title
-HAVING COUNT(employee_id) > 1;
-
--- Example select queries using subqueries
--- A) Find the name of the animal that eats alfalfa
-
-SELECT a.animal_id, a.species_name
-FROM animals a
-WHERE animal_id =  
-	(SELECT f.FoodType_ID
-	FROM feeding f
-	WHERE FoodType = 'alfalfa')
-;
-
--- B) Find the name of the animals species where food stock is 0 
-
-SELECT a.animal_id, a.species_name
-FROM animals a
-WHERE animal_id = 
-	(SELECT f.Animal_id
-	FROM feeding f
-	WHERE f.FoodType_ID = 
-		(SELECT fs.FoodType_ID
-		FROM food_stock fs
-		WHERE fs.Amount_available = 0)
-	);
-    
--- C) Find the names of animals for which there is not enough food stock
-
-SELECT a.animal_id, a.species_name
-FROM animals a
-WHERE animal_id IN 
-    (SELECT f.Animal_id
-	FROM feeding f
-	WHERE f.FoodType_ID IN 	
-		(SELECT vwf.FoodType_ID
-		FROM vw_FoodStock vwf
-		WHERE enough_FoodStock(Amount_available, Amount_eats) = 'NO'
-		OR enough_FoodStock(Amount_available, Amount_eats) = 'JUST ENOUGH'))
-		;
-
 -- Join
 
 SELECT f.FoodType_ID, f.FoodType, f.Amount_eats,
@@ -174,5 +119,57 @@ BEGIN
 	WHERE amount_available <= 10;
 END$$
 
-DELIMITER ;									      
-									      
+DELIMITER ;
+
+
+-- Example query 
+
+SELECT employee_id, full_name, job_title, year(hire_date) as hire_year
+FROM zookeeper
+WHERE hire_date < '2011/03/19';
+
+-- Example query using group by and having
+-- Find out which job roles have more than 1 employee
+
+SELECT job_title, COUNT(employee_id) as number_of_staff
+FROM zookeeper
+GROUP BY job_title
+HAVING COUNT(employee_id) > 1;
+
+-- Example select queries using subqueries
+-- A) Find the name of the animal that eats alfalfa
+
+SELECT a.animal_id, a.species_name
+FROM animals a
+WHERE animal_id =  
+	(SELECT f.FoodType_ID
+	FROM feeding f
+	WHERE FoodType = 'alfalfa')
+;
+
+-- B) Find the name of the animals species where food stock is 0 
+
+SELECT a.animal_id, a.species_name
+FROM animals a
+WHERE animal_id = 
+	(SELECT f.Animal_id
+	FROM feeding f
+	WHERE f.FoodType_ID = 
+		(SELECT fs.FoodType_ID
+		FROM food_stock fs
+		WHERE fs.Amount_available = 0)
+	);
+    
+-- C) Find the names of animals for which there is not enough food stock
+
+SELECT a.animal_id, a.species_name
+FROM animals a
+WHERE animal_id IN 
+    (SELECT f.Animal_id
+	FROM feeding f
+	WHERE f.FoodType_ID IN 	
+		(SELECT vwf.FoodType_ID
+		FROM joinv vwf
+		WHERE enough_FoodStock(Amount_available, Amount_eats) = 'NO'
+		OR enough_FoodStock(Amount_available, Amount_eats) = 'JUST ENOUGH'))
+		;
