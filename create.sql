@@ -1,12 +1,27 @@
 -- Create the database and tables
 
 -- Create zoo database
-
 CREATE DATABASE zoo; 
 
 -- Use this database to create tables
 
 USE zoo; 
+
+--  Enclosure table
+
+CREATE TABLE enclosure 
+(
+	enclosure_id INT NOT NULL,
+	enclosure_name VARCHAR(55),
+	allocated_zookeeper INT,
+	animal_id INT,
+	opening_hours VARCHAR(10),
+
+	CONSTRAINT
+	enclosure_pk 
+	PRIMARY KEY
+	(enclosure_id)
+);
 
 -- Animal table
 
@@ -38,32 +53,6 @@ CREATE TABLE zookeeper
 ALTER TABLE zookeeper
 ADD CONSTRAINT zookeeper_pk
 PRIMARY KEY (employee_id); 
-
-ALTER TABLE zookeeper
-ADD CONSTRAINT zookeeper_fk
-FOREIGN KEY (person_id) REFERENCES people(person_id);
-
---  Enclosure table
-
-CREATE TABLE enclosure 
-(
-	enclosure_id INT NOT NULL,
-	enclosure_name VARCHAR(55),
-	allocated_zookeeper INT,
-	animal_id INT,
-	opening_hours VARCHAR(10),
-
-	CONSTRAINT
-	enclosure_pk 
-	PRIMARY KEY
-	(enclosure_id),
-
-	CONSTRAINT animal_fk FOREIGN KEY (animal_id)
-	REFERENCES animals(animal_id),
-
-	CONSTRAINT zookeeper_fk FOREIGN KEY (allocated_zookeeper)
-	REFERENCES zookeeper(employee_id)
-);
 
 -- Feeding table
 
@@ -132,10 +121,6 @@ ALTER TABLE visitors
 ADD CONSTRAINT visitors_pk
 PRIMARY KEY (visitor_id);
 
-ALTER TABLE visitors
-ADD CONSTRAINT visitors_fk
-FOREIGN KEY (person_id) REFERENCES people(person_id);
-
 -- Visitor ticket table
 
 CREATE TABLE visitor_ticket
@@ -145,11 +130,31 @@ CREATE TABLE visitor_ticket
     date_valid DATE,
     visitor_id INT NOT NULL
 );
+
     
 ALTER TABLE visitor_ticket
 ADD CONSTRAINT visitor_ticket_pk
 PRIMARY KEY (ticket_number);
 
+    
+-- enclosure foreign keys
+ALTER TABLE enclosure
+ADD CONSTRAINT animal_fk
+FOREIGN KEY (animal_id) REFERENCES animals(animal_id);
+
+ALTER TABLE enclosure
+ADD CONSTRAINT allocated_zookeeper_fk FOREIGN KEY (allocated_zookeeper)
+REFERENCES zookeeper(employee_id); 
+
+-- zookeeper foreign key   
+
+ALTER TABLE zookeeper
+ADD CONSTRAINT zookeeper_fk
+FOREIGN KEY (person_id) REFERENCES people(person_id);
+
+-- ticket foreign key
 ALTER TABLE visitor_ticket
 ADD CONSTRAINT visitor_ticket_fk
 FOREIGN KEY (visitor_id) REFERENCES visitors(visitor_id);
+
+
