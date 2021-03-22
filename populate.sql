@@ -1,41 +1,18 @@
 use zoo;
 
-insert into
-enclosure
-(enclosure_id, enclosure_name, allocated_zookeeper, animal_id, opening_hours)
-values
-(001, 'land of the lion', 002, 1 , '0800-1800'),
-(002, 'zone of the zebra', 003, 2 , '0800-1800'),
-(003, 'grounds of the giraffe', 004, 3 , '0800-1800'),
-(004, 'home of the hippos', 005, 4 , '0800-1800'),
-(005, 'parade of the penguins', 006, 5 , '0800-1800'),
-(006, 'locale of the lemur', 007, 6 , '0800-1800')
-;
-
 INSERT INTO people
 (person_id, full_name, address, email_address, contact_number, date_of_birth, gender)
 VALUES
-(100, 'Michael Scott', '45 Kellum Court', 'manager@dundermifflin.com', '07287476472', '1980-08-10', 'Male'),
-(200, 'Dwight Schrute', '1725 Slough Avenue', 'schrute.attrm@hotmail.com', '07485484372', '1984-10-05', 'Male'),
-(300, 'Pam Beesly', '13821 Calvert Street', 'pam_beesly@gmail.com', '07289287937', '1992-04-16', 'Female'),
-(400, 'Jim Halpert', '13821 Calvert Street', 'jimhalpert@gmail.com','07108918872', '1990-07-19', 'Male'),
-(500, 'Creed Bratton', null, null, null, '1960-12-12', 'Male'),
-(600, 'Toby Flenderson', '5752 Calhoun Avenue', 'hr@dundermifflin.com', '07465399100', '1976-02-27', 'Male'),
-(700, 'Kelly Kapoor', '100 Barclay Hill', 'kellykapoor@hotmail.com', '07773645232', '1995-05-21', 'Female'),
-(800, 'Blair Waldorf', '1136 Fifth Avenue', 'blair.waldorf@gmail.com', '07158375382', '1991-11-15', 'Female'),
-(900, 'Dan Humphrey', '455 Water Street', 'danhumphrey@aol.com', '07826105639', '1991-04-20', 'Male'),
-(110, 'Serena Van Der Woodsen', '455 Madison Avenue', 'serenavdw@hotmail.com', '07483105271', '1991-07-14', 'Female');
-
-INSERT INTO zookeeper
-(employee_id, person_id, full_name, job_title, hire_date, date_of_birth, gender, allocated_enclosure, contact_number)
-VALUES
-(001, 001, 'Michael Scott', 'Manager', '2007-04-05', '1980-08-10', 'Male', null, '07287476472'),
-(002, 002, 'Dwight Schrute', 'Assistant Manager', '2010-03-29', '1984-10-05', 'Male', null, '07485484372'),
-(003, 003, 'Pam Beesly', 'Zookeeper', '2009-06-29', '1992-04-16', 'Female', 'monkey kingdom', '07289287937'),
-(004, 004, 'Jim Halpert', 'Lead Zookeeper', '2013-09-03', '1990-07-19', 'Male', 'monkey kingdom', '07108918872'),
-(005, 005, 'Creed Bratton', 'Zookeeper', '2000-01-01', '1960-12-12', 'Male', 'rhino reserve', null),
-(006, 006, 'Toby Flenderson', 'Zookeeper', '2011-02-19', '1976-02-27', 'Male', 'penguin parade', '07465399100'),
-(007, 007, 'Kelly Kapoor', 'Zookeeper', '2015-03-10', '1995-05-21', 'Female', 'penguin parade', '07773645232');
+(001, 'Michael Scott', '45 Kellum Court', 'manager@dundermifflin.com', '07287476472', '1980-08-10', 'Male'),
+(002, 'Dwight Schrute', '1725 Slough Avenue', 'schrute.attrm@hotmail.com', '07485484372', '1984-10-05', 'Male'),
+(003, 'Pam Beesly', '13821 Calvert Street', 'pam_beesly@gmail.com', '07289287937', '1992-04-16', 'Female'),
+(004, 'Jim Halpert', '13821 Calvert Street', 'jimhalpert@gmail.com','07108918872', '1990-07-19', 'Male'),
+(005, 'Creed Bratton', null, null, null, '1960-12-12', 'Male'),
+(006, 'Toby Flenderson', '5752 Calhoun Avenue', 'hr@dundermifflin.com', '07465399100', '1976-02-27', 'Male'),
+(007, 'Kelly Kapoor', '100 Barclay Hill', 'kellykapoor@hotmail.com', '07773645232', '1995-05-21', 'Female'),
+(008, 'Blair Waldorf', '1136 Fifth Avenue', 'blair.waldorf@gmail.com', '07158375382', '1991-11-15', 'Female'),
+(009, 'Dan Humphrey', '455 Water Street', 'danhumphrey@aol.com', '07826105639', '1991-04-20', 'Male'),
+(010, 'Serena Van Der Woodsen', '455 Madison Avenue', 'serenavdw@hotmail.com', '07483105271', '1991-07-14', 'Female');
 
 INSERT INTO visitors
 (visitor_id, person_id, ticket_number, full_name, returner, address, contact_number, email_address, date_of_birth)
@@ -81,3 +58,26 @@ VALUES
 (4, 100),
 (5, 0),
 (6, 12);
+
+INSERT INTO zookeeper
+(employee_id, person_id, full_name, job_title, hire_date, date_of_birth, gender, allocated_enclosure, contact_number)
+VALUES
+(001, 001, 'Michael Scott', 'Manager', '2007-04-05', '1980-08-10', 'Male', null, '07287476472'),
+(002, 002, 'Dwight Schrute', 'Assistant Manager', '2010-03-29', '1984-10-05', 'Male', null, '07485484372'),
+(003, 003, 'Pam Beesly', 'Zookeeper', '2009-06-29', '1992-04-16', 'Female', 'monkey kingdom', '07289287937'),
+(004, 004, 'Jim Halpert', 'Lead Zookeeper', '2013-09-03', '1990-07-19', 'Male', 'monkey kingdom', '07108918872'),
+(005, 005, 'Creed Bratton', 'Zookeeper', '2000-01-01', '1960-12-12', 'Male', 'rhino reserve', null),
+(006, 006, 'Toby Flenderson', 'Zookeeper', '2011-02-19', '1976-02-27', 'Male', 'penguin parade', '07465399100'),
+(007, 007, 'Kelly Kapoor', 'Zookeeper', '2015-03-10', '1995-05-21', 'Female', 'penguin parade', '07773645232');
+
+insert into
+enclosure
+(enclosure_id, enclosure_name, allocated_zookeeper, animal_id, opening_hours)
+values
+(001, 'land of the lion', 002, 1 , '0800-1800'),
+(002, 'zone of the zebra', 003, 2 , '0800-1800'),
+(003, 'grounds of the giraffe', 004, 3 , '0800-1800'),
+(004, 'home of the hippos', 005, 4 , '0800-1800'),
+(005, 'parade of the penguins', 006, 5 , '0800-1800'),
+(006, 'locale of the lemur', 007, 6 , '0800-1800')
+;
